@@ -4,19 +4,26 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
-    <div id="app">{{message}}</div>
+    <div id="app">
+      <p>Player 1: {{player1}}</p>
+      <p>Player 2: {{player2}}</p>
+    </div>
 
     <script>
       var app = new Vue({
         el: "#app",
         data: {
-          message: "Do not go gently into that good night",
+          player1: "",
+          player2: "",
         },
       });
 
       //step 1: open console
       //step 2: write the following line
-      //	app.message="Rage, rage against the dying of the light";
+      //	app.player1="Name 1";
+      //	app.player2="Name 2";
+
+      //idea behind this is to allow the players to enter their names
     </script>
   </body>
 </html>

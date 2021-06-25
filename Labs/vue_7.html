@@ -12,31 +12,110 @@
 	<p>Tournament Selection <a href="https://cemc.uwaterloo.ca/contests/computing/2016/stage%201/juniorEn.pdf">from the J1 problem hosted by the CCC.</a></p>
 	<div id="app">
 		<div class="formfield">
-			<label>Game 1: <label> <input v-model="result">
+			<label>Game 1: <label> 
+				<select v-model="game1">
+					<option v-for="option in options" v-bind:value="option.value">
+					  {{ option.text }}
+					</option>
+				  </select>
+				  <span>Score: {{ game1 }}</span>
+		</div>
+		<div class="formfield">
+			<label>Game 2: <label> 
+				<select v-model="game2">
+					<option v-for="option in options" v-bind:value="option.value">
+					  {{ option.text }}
+					</option>
+				  </select>
+				  <span>Score: {{ game2 }}</span>
+		</div>
+		<div class="formfield">
+			<label>Game 3: <label> 
+				<select v-model="game3">
+					<option v-for="option in options" v-bind:value="option.value">
+					  {{ option.text }}
+					</option>
+				  </select>
+				  <span>Score: {{ game3 }}</span>
+		</div>
+		<div class="formfield">
+			<label>Game 4: <label> 
+				<select v-model="game4">
+					<option v-for="option in options" v-bind:value="option.value">
+					  {{ option.text }}
+					</option>
+				  </select>
+				  <span>Score: {{ game4 }}</span>
+		</div>
+		<div class="formfield">
+			<label>Game 5: <label> 
+				<select v-model="game5">
+					<option v-for="option in options" v-bind:value="option.value">
+					  {{ option.text }}
+					</option>
+				  </select>
+				  <span>Score: {{ game5 }}</span>
+		</div>
+		<div class="formfield">
+			<label>Game 6: <label> 
+				<select v-model="game6">
+					<option v-for="option in options" v-bind:value="option.value">
+					  {{ option.text }}
+					</option>
+				  </select>
+				  <span>Score: {{ game6 }}</span>
 		</div>
 
-		<div id="result">
-			<div><label>You are in group: </label></div>
-            <p>1</p>
+		<div id="totalScore">
+			<div>Total Score: {{score_total}}</div>
 		</div>
+
+		<div id="groupResult">
+			<span v-if="group_1">{{group_1}}</span>
+			<span v-if="group_2">{{group_2}}</span>
+			<span v-if="group_3">{{group_3}}</span>
+			<span v-if="eliminated">{{eliminated}}</span>
+		</div>
+
 	</div>
 	
 	<script>
 	var app = new Vue({
 		el: '#app',
 		data:{
+			game1: '',
+			game2: '',
+			game3: '',
+			game4: '',
+			game5: '',
+			game6: '',
 
+			options: [
+     		{ text: 'Win', value: 1 },
+    		{ text: 'Loss', value: 0 },
+ 		   ]
 		},
 		computed:{
             score_total: function () {
-                return 
-                (this.game_win * this.win_result) +
-                (this.game_loss * this.loss_result)
+				return (this.game1 + this.game2 + this.game3 + this.game4 + this.game5 + this.game6)
             },
+			group_1: function() {
+				if (this.score_total === 5 || this.score_total === 6)
+				return "You are in group 1!"
+			},
+			group_2: function() {
+				if (this.score_total === 3 || this.score_total === 4)
+				return "You are in group 2!"
+			},
+			group_3: function() {
+				if (this.score_total === 1 || this.score_total === 2)
+				return "You are in group 3!"
+			},
+			eliminated: function() {
+				if (this.score_total === 0)
+				return "Sorry, you have been eliminated from the tournament."
+			}
 
-            group_placement:function(){
-                var group = this.score_total;
-            }
 		}
 	});
 	
